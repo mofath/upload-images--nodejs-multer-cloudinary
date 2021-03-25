@@ -19,5 +19,6 @@ app.use(bodyParser.json());
 app.use(express.static("images"));
 
 app.post("/image", uploadController);
+app.use("/image", express.static('images'));
 
 app.listen(5000, () => console.log("Server is listening on port 5000"));
