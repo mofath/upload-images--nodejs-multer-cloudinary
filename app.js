@@ -1,22 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const uploadController = require("./controller");
+
 const app = express();
-const userModel = require("./models/user-model");
-const 
 
 mongoose
-  .connect(
-    "mongodb+srv://mhmd:mofath20@cluster0.73rpk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() => {
-    console.log("mongodb connected");
+  .connect("", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch(() => console.log());
+  .then(() => console.log("mongodb connected"))
+  .catch((e) => console.log(e.message));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static("images"));
+
+app.post("/image", uploadController);
 
 app.listen(5000, () => console.log("Server is listening on port 5000"));
