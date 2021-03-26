@@ -6,7 +6,7 @@ const uploadController = require("./controller");
 const app = express();
 
 mongoose
-  .connect("", {
+  .connect("mongodb://localhost:27017/cloudinary", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
