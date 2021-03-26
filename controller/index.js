@@ -1,3 +1,4 @@
+const fs = require("fs")
 const multerConfig = require("../multer");
 const UserModel = require("../models/user-model");
 const { uploadToCloudinary } = require("../cloudinaryConfig");
@@ -16,6 +17,8 @@ const uploadController = async (req, res, next) => {
       });
 
       await newUser.save();
+
+      fs.unlinkSync(res.req.file.path)
 
       return res.status(200).json({
         message: "Success",
